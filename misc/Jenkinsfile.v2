@@ -9,6 +9,8 @@ node {
      def myTestContainer = docker.image('node:14.7')
      myTestContainer.pull()
      myTestContainer.inside {
+       sh 'mkdir /.npm'
+       sh 'chown -R 127:135 "/.npm"'
        sh 'npm install --only=dev'
        sh 'npm test'
      }
